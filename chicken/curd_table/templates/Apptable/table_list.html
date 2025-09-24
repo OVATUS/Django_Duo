@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Table List</h1>
+{% for table_item in tables %}
+    <div>
+        <p>ID: {{ table_item.id }}</p>
+        <p>Table Number: {{ table_item.table_number }}</p>
+        <p>Capacity: {{ table_item.capacity }}</p>
+        <p>Available: {{ table_item.is_available }}</p>
+        <p>Location: {{ table_item.location }}</p>
+        <p>Description: {{ table_item.description }}</p>
+    </div>
+{% endfor %}
+
+{% endblock %}
