@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+    {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="{% static 'dist/styles.css' %}" rel="stylesheet">
+</head>
+<body class="bg-blue-400 min-h-screen flex items-center justify-center">
+  {% block content %}
+  {% endblock %}
+</body>
+</html>
