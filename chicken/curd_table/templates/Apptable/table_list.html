@@ -1,11 +1,31 @@
 {% extends "base.html" %}
+
 {% block content %}
 <h1>Table List</h1>
-{% for table_item in tables %}
-    <div>
-        <p>Table Number: {{ table_item.table_number }}</p>
-        <p>Capacity: {{ table_item.capacity }}</p>
-    </div>
-{% endfor %}
+<a href="{% url 'table_create' %}">Add New Table</a>
 
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    {% for table_item in tables %}
+    <tr>
+        <td>{{ table_item.id }}</td>
+        <td>{{ table_item.title }}</td>
+        <td>{{ table_item.description }}</td>
+        <td>
+            <a href="{% url 'table_detail' table_item.pk %}">View</a> |
+            <a href="{% url 'table_update' table_item.pk %}">Edit</a> |
+            <a href="{% url 'table_delete' table_item.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No tables found.</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}

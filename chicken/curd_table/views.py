@@ -8,9 +8,9 @@ class curd_table_view(ListView):
     context_object_name = 'tables'
     queryset = Table.objects.all()
 
-class Tabledetail(DeleteView):
+class Tabledetail(DetailView):
+    model = Table
     template_name = 'Apptable/table_detail.html'
-    mdoel = Table
     context_object_name = 'tables_detail'
 
 
@@ -25,5 +25,5 @@ class Tableupdate(UpdateView):
     fields = '__all__'
 
 class TableDelete(DeleteView):
-    template_naem = 'Apptable/table_delete.html'
+    template_name = 'Apptable/table_delete.html'
     model = Table
