@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>แผนผังร้าน</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <h2 class="text-center text-2xl font-bold mt-4">แผนผังร้าน ({{ today }})</h2>
+
+  <form method="post" class="flex flex-col items-center mt-6">
+    {% csrf_token %}
+
+    <div class="relative bg-gray-800 w-[900px] h-[750px] rounded-lg shadow-lg p-4">
+
+  <!-- เวที -->
+  <div class="absolute top-2 left-1/2 -translate-x-1/2 
+              w-64 h-12 bg-pink-600 rounded-lg flex items-center justify-center font-bold shadow-md">
+    เวที
+  </div>
+
+  <!-- โซน A -->
+<div class="absolute top-20 left-4 w-[400px] h-[250px] border border-gray-500 rounded-md p-2">
+  <p class="text-xs text-gray-300 mb-1">โซน A (6 โต๊ะ)</p>
+  <div class="grid grid-cols-3 gap-2">
+    {% for table in tables %}
+      {% if table.zone == "A" %}
+        {% include "reservations/_table_button.html" with table=table %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<!-- โซน B -->
+<div class="absolute top-20 right-4 w-[400px] h-[250px] border border-gray-500 rounded-md p-2">
+  <p class="text-xs text-gray-300 mb-1">โซน B (6 โต๊ะ)</p>
+  <div class="grid grid-cols-3 gap-2">
+    {% for table in tables %}
+      {% if table.zone == "B" %}
+        {% include "reservations/_table_button.html" with table=table %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<!-- โซน C -->
+<div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-[820px] h-[250px] border border-gray-500 rounded-md p-2">
+  <p class="text-xs text-gray-300 mb-1">โซน C (10 โต๊ะ)</p>
+  <div class="grid grid-cols-5 gap-2">
+    {% for table in tables %}
+      {% if table.zone == "C" %}
+        {% include "reservations/_table_button.html" with table=table %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+
+  <!-- ทางเข้า -->
+  <div class="absolute bottom-2 left-1/2 -translate-x-1/2 
+              w-48 h-10 bg-pink-600 rounded-lg flex items-center justify-center font-bold shadow-md">
+    ทางเข้า
+  </div>
+</div>
+
+      <!-- วนลูปโต๊ะ -->
+      {% for table in tables %}
+        <button type="button" 
+          data-id="{{ table.id }}"
+          class="table-btn absolute w-24 h-20 rounded-lg shadow-md text-center font-bold p-1
+                  {% if table.id in booked_table_ids %}
+                    bg-red-600 cursor-not-allowed opacity-80
+                  {% else %}
+                    bg-pink-500 hover:bg-pink-600
+                  {% endif %}"
+          style="top: {{ table.pos_y }}px; left: {{ table.pos_x }}px;"
+          {% if table.id in booked_table_ids %}disabled{% endif %}>
+  
+          {{ table.table_number }}
+          <div class="text-xs">{{ table.seats }} ที่นั่ง</div>
+          <div class="text-xs">
+            {% if table.id in booked_table_ids %}
+              ❌ ไม่ว่าง
+            {% else %}
+              ✅ ว่าง
+            {% endif %}
+          </div>
+        </button>
+      {% endfor %}
+    </div>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".table-btn");
+    const hiddenInput = document.getElementById("selectedTables");
+    let selected = [];
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", function() {
+        const tableId = this.getAttribute("data-id");
+
+        if (selected.includes(tableId)) {
+          // ถ้าเลือกอยู่แล้ว → เอาออก
+          selected = selected.filter(id => id !== tableId);
+          this.classList.remove("bg-green-500");
+          this.classList.add("bg-pink-500", "hover:bg-pink-600");
+        } else {
+          // ถ้ายังไม่เลือก → เพิ่มเข้าไป
+          selected.push(tableId);
+          this.classList.remove("bg-pink-500", "hover:bg-pink-600");
+          this.classList.add("bg-green-500");
+        }
+
+        // อัปเดต hidden input (เก็บเป็น JSON)
+        hiddenInput.value = JSON.stringify(selected);
+        console.log("โต๊ะที่เลือก:", selected);
+      });
+    });
+  });
+</script>
+
+    <!-- เลือกเวลา -->
+    <div class="mt-6 flex items-center gap-3">
+      <label class="text-lg">เลือกเวลา (วันนี้เท่านั้น):</label>
+      <input type="datetime-local" name="reservation_time"
+         min="{{ today }}T00:00" max="{{ today }}T23:59" required
+         class="px-3 py-2 rounded-md text-black">
+      <button type="submit" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-bold">
+       ยืนยันการจอง
+      </button>
+    </div>
+  </form>
+</body>
+</html>

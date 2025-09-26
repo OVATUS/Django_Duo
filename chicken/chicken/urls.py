@@ -23,4 +23,5 @@ from curd_table import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('curd_table.urls')),
+    path("", include("uiuser.urls")),
 ]

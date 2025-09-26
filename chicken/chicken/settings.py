@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'curd_table',
+    "uiuser",
 ]
 
 MIDDLEWARE = [
@@ -77,10 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'postgres.nopjdwdzvascjqxadwqp',
-        'PASSWORD': 'zee&fern2547',
-        'HOST': 'aws-1-ap-southeast-1.pooler.supabase.com',
-        'PORT': '6543',
+        'USER': 'postgres',
+        'PASSWORD': '123456789',
+        'HOST': 'db.ptudosfubpnsxpryiunt.supabase.co',
+        'PORT': '5432',
     }
 }
 
