@@ -1,4 +1,4 @@
-<nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg mt-4">
+<nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       
@@ -12,7 +12,14 @@
         <a href="{% url 'table_create' %}"
             class="text-white bg-indigo-500 px-4 py-2 rounded-lg shadow-md 
                   hover:bg-indigo-700 hover:shadow-lg transition">
-          เพิ่มโต๊ะ
+          ดูรายการโต๊ะ
+        </a>
+      </div>
+      <div class="flex space-x-6">
+        <a href="{% url 'table_create' %}"
+            class="text-white bg-indigo-500 px-4 py-2 rounded-lg shadow-md 
+                  hover:bg-indigo-700 hover:shadow-lg transition">
+          รายการอาหาร
         </a>
       </div>
     </div>
