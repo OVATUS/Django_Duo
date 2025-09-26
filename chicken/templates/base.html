@@ -1,15 +1,15 @@
 <!doctype html>
-<html>
-<head>
+<html lang="en">
+  <head>
     {% load static %}
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="{% static 'dist/styles.css' %}" rel="stylesheet">
-</head>
-<body class ="bg-blue-100">
-  {% include "navbar.html" %} 
-  {% block content %}
-
-  {% endblock %}
-</body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Chicken Cafe Website</title> 
+    <link href="{% static 'dist/styles.css' %}" rel="stylesheet">
+  </head>
+  <body class="bg-blue-200">
+    {% include "navbar.html" %} 
+    {% block content %}
+    {% endblock %}
+  </body>
 </html>
