@@ -11,63 +11,38 @@
   <form method="post" class="flex flex-col items-center mt-6">
     {% csrf_token %}
 
-    <div class="relative bg-gray-800 w-[900px] h-[750px] rounded-lg shadow-lg p-4">
+    <div class="relative bg-gray-800 w-[900px] h-[700px] rounded-lg shadow-lg">
 
-  <!-- เวที -->
-  <div class="absolute top-2 left-1/2 -translate-x-1/2 
+        <div class="absolute top-2 left-1/2 -translate-x-1/2 
               w-64 h-12 bg-pink-600 rounded-lg flex items-center justify-center font-bold shadow-md">
     เวที
   </div>
 
   <!-- โซน A -->
-<div class="absolute top-20 left-4 w-[400px] h-[250px] border border-gray-500 rounded-md p-2">
-  <p class="text-xs text-gray-300 mb-1">โซน A (6 โต๊ะ)</p>
-  <div class="grid grid-cols-3 gap-2">
-    {% for table in tables %}
-      {% if table.zone == "A" %}
-        {% include "reservations/_table_button.html" with table=table %}
-      {% endif %}
-    {% endfor %}
+  <div class="absolute top-4 left-4 w-[400px] h-[350px] border border-gray-500 rounded-md">
+    <p class="absolute top-1 left-2 text-xs text-gray-300">โซน A</p>
   </div>
-</div>
 
-<!-- โซน B -->
-<div class="absolute top-20 right-4 w-[400px] h-[250px] border border-gray-500 rounded-md p-2">
-  <p class="text-xs text-gray-300 mb-1">โซน B (6 โต๊ะ)</p>
-  <div class="grid grid-cols-3 gap-2">
-    {% for table in tables %}
-      {% if table.zone == "B" %}
-        {% include "reservations/_table_button.html" with table=table %}
-      {% endif %}
-    {% endfor %}
+  <!-- โซน B -->
+  <div class="absolute top-4 right-4 w-[400px] h-[350px] border border-gray-500 rounded-md">
+    <p class="absolute top-1 left-2 text-xs text-gray-300">โซน B</p>
   </div>
-</div>
 
-<!-- โซน C -->
-<div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-[820px] h-[250px] border border-gray-500 rounded-md p-2">
-  <p class="text-xs text-gray-300 mb-1">โซน C (10 โต๊ะ)</p>
-  <div class="grid grid-cols-5 gap-2">
-    {% for table in tables %}
-      {% if table.zone == "C" %}
-        {% include "reservations/_table_button.html" with table=table %}
-      {% endif %}
-    {% endfor %}
+  <!-- โซน C -->
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-[800px] h-[300px] border border-gray-500 rounded-md">
+    <p class="absolute top-1 left-2 text-xs text-gray-300">โซน C</p>
   </div>
-</div>
-
 
   <!-- ทางเข้า -->
   <div class="absolute bottom-2 left-1/2 -translate-x-1/2 
-              w-48 h-10 bg-pink-600 rounded-lg flex items-center justify-center font-bold shadow-md">
+              w-48 h-10 bg-pink-600 rounded-lg flex items-center justify-center font-bold">
     ทางเข้า
   </div>
-</div>
-
       <!-- วนลูปโต๊ะ -->
       {% for table in tables %}
         <button type="button" 
           data-id="{{ table.id }}"
-          class="table-btn absolute w-24 h-20 rounded-lg shadow-md text-center font-bold p-1
+          class="table-btn absolute w-20 h-15 rounded-lg shadow-md text-center font-bold p-1
                   {% if table.id in booked_table_ids %}
                     bg-red-600 cursor-not-allowed opacity-80
                   {% else %}

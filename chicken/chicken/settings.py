@@ -129,3 +129,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "reservation_history"   # เมื่อ login สำเร็จจะไปที่หน้าไหน
+LOGOUT_REDIRECT_URL = "login"
