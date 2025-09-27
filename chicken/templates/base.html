@@ -1,15 +1,23 @@
+{% load static %}
 <!doctype html>
-<html lang="en">
-  <head>
-    {% load static %}
+<html lang="th"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Chicken Cafe Website</title> 
+    
+    <title>{% block title %}Chicken Cafe{% endblock %}</title> 
+    
     <link href="{% static 'dist/styles.css' %}" rel="stylesheet">
   </head>
-  <body class="bg-blue-200">
+  <body class="bg-blue-300">
+    
     {% include "navbar.html" %} 
-    {% block content %}
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% block scripts %}
     {% endblock %}
   </body>
 </html>

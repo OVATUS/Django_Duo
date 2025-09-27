@@ -1,11 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>รายละเอีดยของโต๊ะ</h1>
+<div class="max-w-2xl mx-auto mt-10">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="px-6 py-4 bg-gray-800 text-white">
+            <h1 class="text-2xl font-bold">Table Details</h1>
+        </div>
+        
+        <div class="border-t border-gray-200">
+            <dl>
+                <div class="bg-gray-50 px-6 py-4 grid grid-cols-3 gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Table Number</dt>
+                    <dd class="mt-1 text-sm text-gray-900 col-span-2">{{ tables_detail.table_number }}</dd>
+                </div>
+                
+                <div class="bg-white px-6 py-4 grid grid-cols-3 gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Zone</dt>
+                    <dd class="mt-1 text-sm text-gray-900 col-span-2">{{ tables_detail.zone }}</dd>
+                </div>
 
-zone: {{tables_detail.zone}}
-เลขโต๊ะ {{table_number}} - {{table_detail.pos_x}}
-{% comment %} <a href="{% url 'table_update' tables_detail.pk %}">Edit</a> |
-<a href="{% url 'table_delete' tables_detail.pk %}">Delete</a> |
-<a href="{% url 'curd_table' %}">Back to Table List</a> {% endcomment %}
+                <div class="bg-gray-50 px-6 py-4 grid grid-cols-3 gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Seats</dt>
+                    <dd class="mt-1 text-sm text-gray-900 col-span-2">{{ tables_detail.seats }}</dd>
+                </div>
+
+                <div class="bg-white px-6 py-4 grid grid-cols-3 gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Restaurant</dt>
+                    <dd class="mt-1 text-sm text-gray-900 col-span-2">{{ tables_detail.restaurant.name }}</dd>
+                </div>
+            </dl>
+        </div>
+
+        <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+            <a href="{% url 'curd_table' %}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">Back to List</a>
+            <a href="{% url 'table_update' tables_detail.pk %}" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Edit</a>
+            <a href="{% url 'table_delete' tables_detail.pk %}" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Delete</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

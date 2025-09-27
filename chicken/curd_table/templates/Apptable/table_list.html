@@ -1,15 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class = "text-center">รายชื่อโต๊ะ Chicken Cafe</h1>
-<a href="{% url 'table_create' %}">เพิ่มโต๊ะ</a><br>
-{% for table_item in tables %}
-    
-        {{ table_item.table_number }}
-        {{ table_item.description }}
-            <a href="{% url 'table_detail' table_item.pk %}">View</a> |
-            <a href="{% url 'table_update' table_item.pk %}">Edit</a> |
-            <a href="{% url 'table_delete' table_item.pk %}">Delete</a>
-             <br>
-{% endfor %}
+<div class="container mx-auto px-4 py-8">
+
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-900">Table Management</h1>
+        <a href="{% url 'table_create' %}" class="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">
+            + Add New Table
+        </a>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <table class="min-w-full leading-normal">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Table Number</th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Zone</th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Seats</th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Restaurant</th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 text-center text-xs font-semibold uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for table in tables %}
+                <tr class="hover:bg-gray-100">
+                    <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">{{ table.table_number }}</td>
+                    <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">{{ table.zone }}</td>
+                    <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">{{ table.seats }}</td>
+                    <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">{{ table.restaurant.name }}</td>
+                    <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm text-center space-x-2">
+                        <a href="{% url 'table_detail' table.pk %}" class="text-blue-600 hover:text-blue-900 font-semibold">View</a>
+                        <a href="{% url 'table_update' table.pk %}" class="text-yellow-600 hover:text-yellow-900 font-semibold">Edit</a>
+                        <a href="{% url 'table_delete' table.pk %}" class="text-red-600 hover:text-red-900 font-semibold">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-10 text-gray-500">No tables found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
