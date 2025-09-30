@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>{% block title %}Chicken Cafe{% endblock %}</title> 
+    <title>Chicken Cafe</title> 
     
     <link href="{% static 'dist/styles.css' %}" rel="stylesheet">
   </head>
   <body class= "bg-gray-200">
-    {% block content %}
-      {% include "navbar.html" %}  
-    {% endblock %}
+    {%block user%}
+    {%endblock%}
   </body>
 </html>

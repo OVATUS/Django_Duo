@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!doctype html>
+<html lang="th"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Cafe</title> 
+    <link href="{% static 'dist/styles.css' %}" rel="stylesheet">
+  </head>
+<body class="bg-gradient-to-r from-yellow-100 via-red-100 to-pink-100 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">🍗 Chicken Cafe - Login</h2>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="mb-4">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+
+        <div class="mb-4">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+
+        <button type="submit"
+                class="w-full bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 shadow-lg transition">
+            Login
+        </button>
+    </form>
+
+    <div class="mt-4 text-center text-gray-600 text-sm">
+        Don't have an account? <a href="{% url 'signup' %}" class="text-red-500 hover:underline">Sign Up</a>
+    </div>
+</div>
+
+</body>
+</html>

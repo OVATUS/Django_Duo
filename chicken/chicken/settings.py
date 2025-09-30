@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'         
 # Application definition
 
 INSTALLED_APPS = [
@@ -86,6 +88,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+AUTH_USER_MODEL = 'uiuser.User'
 
 
 # Password validation

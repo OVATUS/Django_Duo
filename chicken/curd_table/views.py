@@ -32,6 +32,9 @@ class TableDelete(DeleteView):
     template_name = 'Apptable/table_delete.html'
     model = Table
     success_url = reverse_lazy('curd_table')
+
+class testview(TemplateView):
+    template_name = 'Apptable/test.html'
    
 # Food CRUD
 

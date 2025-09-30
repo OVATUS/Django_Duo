@@ -1,0 +1,24 @@
+<nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <div class="flex-shrink-0">
+        <a href="/" class="text-white font-bold text-2xl">Chicken Cafe</a>
+      </div>
+
+      <div class="flex items-center space-x-6">
+        <a href="{% url 'curd_table' %}"
+           class="text-white bg-indigo-500 px-4 py-2 rounded-lg shadow-md 
+                  hover:bg-indigo-700 hover:shadow-lg transition">
+          จัดการโต๊ะ
+        </a>
+        <a href="{% url 'food_list' %}"
+           class="text-white bg-indigo-500 px-4 py-2 rounded-lg shadow-md 
+                  hover:bg-indigo-700 hover:shadow-lg transition">
+          จัดการเมนูอาหาร
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>

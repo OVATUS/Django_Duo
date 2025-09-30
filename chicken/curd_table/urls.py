@@ -8,6 +8,7 @@ urlpatterns = [
     path('table/create/',createtable.as_view(), name='table_create'),
     path('table/update/<int:pk>/', Tableupdate.as_view(), name = 'table_update'),
     path('table/delete/<int:pk>/', TableDelete.as_view(),name = "table_delete"),
+    path('test/', testview.as_view(), name='test_view'),
 
     # food paths
     path('food/', foodlist.as_view(), name='food_list'),

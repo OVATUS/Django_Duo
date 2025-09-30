@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from .models import Table, Reservation
@@ -6,21 +7,45 @@ import json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
+=======
+from urllib import request
+from django.utils import timezone
+from .models import Table, Reservation
+from datetime import datetime, timedelta
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from .forms import SignUpForm, LoginForm
+>>>>>>> 2b6a10c (ทำหน้เา html ทั้งหมด)
 
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('dashboard')  # redirect ไปหน้า dashboard
+    else:
+        form = SignUpForm()
+    return render(request, 'login/signup.html', {'form': form})
 
-def table_plan(request, restaurant_id):
-    today = timezone.localdate()
-    start_of_day = datetime.combine(today, datetime.min.time(), tzinfo=timezone.get_current_timezone())
-    end_of_day = datetime.combine(today, datetime.max.time(), tzinfo=timezone.get_current_timezone())
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = LoginForm()
+    return render(request, 'login/login.html', {'form': form})
 
-    tables = Table.objects.filter(restaurant_id=restaurant_id)
-    today_reservations = Reservation.objects.filter(
-        table__restaurant_id=restaurant_id,
-        reservation_time__range=(start_of_day, end_of_day),
-        status="confirmed"
-    )
-    booked_table_ids = today_reservations.values_list("table_id", flat=True)
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
+<<<<<<< HEAD
     if request.method == "POST":
         table_ids = json.loads(request.POST.get("table_ids", "[]"))
         reservation_time = request.POST.get("reservation_time")
@@ -76,3 +101,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+=======
+def dashboard_view(request):
+    return render(request, 'login/dashboard.html')
+>>>>>>> 2b6a10c (ทำหน้เา html ทั้งหมด)
