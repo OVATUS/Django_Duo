@@ -1,7 +1,0 @@
-<h2>สมัครสมาชิก</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">สมัคร</button>
-  <p>มีบัญชีแล้ว? <a href="{% url 'login' %}">ล็อกอิน</a></p>
-</form>

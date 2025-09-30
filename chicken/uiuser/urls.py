@@ -7,5 +7,4 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('dashboard/', dashboard_view, name='dashboard'),
->>>>>>> 2b6a10c (ทำหน้เา html ทั้งหมด)
 ]
