@@ -8,7 +8,6 @@ from django.contrib import messages
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth.decorators import login_required
 
-@login_required
 def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
@@ -22,19 +21,14 @@ def signup_view(request):
 
 def login_view(request):
     if request.method == "POST":
-        form = LoginForm(data=request.POST)  # ❌ ห้ามส่ง request
+        form = LoginForm(request, data=request.POST)   # ✅
         if form.is_valid():
-            user = authenticate(
-                request,
-                username=form.cleaned_data["username"],
-                password=form.cleaned_data["password"],
-            )
-            if user:
-                login(request, user)
-                return redirect("signup")
+            user = form.get_user()
+            login(request, user)
+            return redirect("home")
     else:
         form = LoginForm()
-    return render(request, 'login/login.html', {'form': form})
+    return render(request, "login/login.html", {"form": form})
 
 
 def logout_view(request):
